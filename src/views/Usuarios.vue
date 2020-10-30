@@ -11,10 +11,10 @@
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
 
-        <v-dialog v-model="dialog" max-width="700px">
+        <v-dialog v-model="dialog" max-width="700px" persistent>
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-              New Item
+              Nuevo Usuario
             </v-btn>
           </template>
           <v-card>
@@ -55,16 +55,18 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialog = !dialog">
+              <v-btn color="blue darken-1" text @click="cerrarDialog()">
                 Cancel
               </v-btn>
-              <v-btn color="blue darken-1" text>
-                Save
+              <v-btn color="blue darken-1" v-if="editedIndex == 1" text @click="actualizar()">
+                Actualizar
+              </v-btn>
+              <v-btn color="blue darken-1" v-if="editedIndex == -1" text @click="crear()">
+                Guardar
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
-        
       </v-toolbar>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
@@ -88,6 +90,7 @@ export default {
   data: () => ({
     usuarios: [],
     dialog: false,
+    editedIndex: -1,
     headers: [
       {
         text: "Nombre",
@@ -101,7 +104,7 @@ export default {
       { text: "Actions", value: "actions", sortable: false },
     ],
     idUsuario: 0,
-    idRol: 0,
+    idRol: 1,
     nombre: "",
     telefono: "",
     correo: "",
@@ -123,14 +126,49 @@ export default {
       axios
         .get("api/Usuarios/Listar")
         .then(function(response) {
-          console.log(response.data);
           me.usuarios = response.data;
         })
         .catch(function(error) {
           console.log(error);
         });
     },
-
+    crear(){
+      let me = this;
+      axios
+        .post("api/Usuarios/Crear", {
+          idRol: 1,
+          nombre: me.nombre,
+          telefono: me.telefono,
+          correo: me.correo,
+          direccion: me.direccion,
+        })
+        .then(function(response) {
+          me.initialize();
+          me.cerrarDialog();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    actualizar() {
+      let me = this;
+      axios
+        .put("api/Usuarios/Actualizar", {
+          idUsuario: me.idUsuario,
+          idRol: me.idRol,
+          nombre: me.nombre,
+          telefono: me.telefono,
+          correo: me.correo,
+          direccion: me.direccion,
+        })
+        .then(function(response) {
+          me.initialize();
+          me.cerrarDialog();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     verDetalles(item) {
       this.idUsuario = item.idUsuario;
       this.idRol = item.idRol;
@@ -139,6 +177,20 @@ export default {
       this.correo = item.correo;
       this.direccion = item.direccion;
       this.dialog = true;
+      this.editedIndex = 1;
+    },
+    limpiar() {
+      (this.idUsuario = ""),
+        (this.idRol = ""),
+        (this.nombre = ""),
+        (this.telefono = ""),
+        (this.correo = ""),
+        (this.direccion = "");
+        this.editedIndex = -1;
+    },
+    cerrarDialog() {
+      this.dialog = false;
+      this.limpiar();
     },
   },
 };
