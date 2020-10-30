@@ -1,8 +1,7 @@
 <template>
    <v-data-table
     :headers="headers"
-    :items="desserts"
-    sort-by="calories"
+    :items="medicos"
     class="elevation-1"
   >
     <template v-slot:top>
@@ -28,7 +27,7 @@
               v-bind="attrs"
               v-on="on"
             >
-              New Item
+              Nuevo Médico
             </v-btn>
           </template>
           <v-card>
@@ -45,8 +44,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.name"
-                      label="Dessert name"
+                      v-model="nombre"
+                      label="Nombre"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -55,8 +54,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.calories"
-                      label="Calories"
+                      v-model="direccion"
+                      label="Dirección"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -65,8 +64,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.fat"
-                      label="Fat (g)"
+                      v-model="telefono"
+                      label="Teléfono"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -75,8 +74,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.carbs"
-                      label="Carbs (g)"
+                      v-model="correo"
+                      label="Correo"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -85,8 +84,8 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.protein"
-                      label="Protein (g)"
+                      v-model="profesion"
+                      label="Profesión"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -98,28 +97,15 @@
               <v-btn
                 color="blue darken-1"
                 text
-                @click="close"
               >
                 Cancel
               </v-btn>
               <v-btn
                 color="blue darken-1"
                 text
-                @click="save"
               >
                 Save
               </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <v-dialog v-model="dialogDelete" max-width="500px">
-          <v-card>
-            <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-              <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -129,15 +115,9 @@
       <v-icon
         small
         class="mr-2"
-        @click="editItem(item)"
+        @click="verDetalle(item)"
       >
         mdi-pencil
-      </v-icon>
-      <v-icon
-        small
-        @click="deleteItem(item)"
-      >
-        mdi-delete
       </v-icon>
     </template>
     <template v-slot:no-data>
@@ -152,55 +132,37 @@
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
+import axios from "axios";
 
 export default {
   name: 'Home',
   data: () => ({
+    medicos: [],
+    editedIndex: -1,
     dialog: false,
-      dialogDelete: false,
       headers: [
         {
-          text: 'Dessert (100g serving)',
+          text: 'Nombre',
           align: 'start',
           sortable: false,
-          value: 'name',
+          value: 'Nombre',
         },
-        { text: 'Calories', value: 'calories' },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
+        { text: 'Dirección', value: 'Direccion' },
+        { text: 'Teléfono', value: 'Telefono' },
+        { text: 'Correo', value: 'Correo' },
+        { text: 'Profesión', value: 'Profesion' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
-      desserts: [],
-      editedIndex: -1,
-      editedItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
-      },
-      defaultItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
-      },
+      idMedico: 0,
+      nombre: "",
+      direccion: "",
+      telefono: "",
+      correo: "",
+      profesion: "",
   }),
   computed: {
       formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-      },
-    },
-
-    watch: {
-      dialog (val) {
-        val || this.close()
-      },
-      dialogDelete (val) {
-        val || this.closeDelete()
+        return this.editedIndex === -1 ? 'Nuevo Medico' : 'Editar Medico'
       },
     },
 
@@ -210,121 +172,80 @@ export default {
 
     methods: {
       initialize () {
-        this.desserts = [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-          },
-        ]
-      },
-
-      editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-
-      deleteItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialogDelete = true
-      },
-
-      deleteItemConfirm () {
-        this.desserts.splice(this.editedIndex, 1)
-        this.closeDelete()
-      },
-
-      close () {
-        this.dialog = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
+        let me = this;
+      axios
+        .get("api/Medicos/Listar")
+        .then(function(response) {
+          me.medicos = response.data;
         })
+        .catch(function(error) {
+          console.log(error);
+        });
       },
-
-      closeDelete () {
-        this.dialogDelete = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
+      crear(){
+      let me = this;
+      axios
+        .post("api/Medicos/Crear", {
+          nombre: me.nombre,
+          direccion: me.direccion,
+          telefono: me.telefono,
+          correo: me.correo,
+          profesion: me.profesion,
         })
+        .then(function(response) {
+          me.initialize();
+          me.cerrarDialog();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
       },
 
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
-        } else {
-          this.desserts.push(this.editedItem)
-        }
-        this.close()
-      },
+      actualizar() {
+      let me = this;
+      axios
+        .put("api/Medicos/Actualizar", {
+          idMedico: me.idMedico,
+          nombre: me.nombre,
+          telefono: me.telefono,
+          correo: me.correo,
+          direccion: me.direccion,
+          profesion: me.profesion,
+        })
+        .then(function(response) {
+          me.initialize();
+          me.cerrarDialog();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+
+     verDetalles(item) {
+      this.idMedico = item.idMedico;
+      this.nombre = item.nombre;
+      this.telefono = item.telefono;
+      this.correo = item.correo;
+      this.direccion = item.direccion;
+      this.profesion = item.profesion;
+      this.dialog = true;
+      this.editedIndex = 1;
+    },
+
+    limpiar() {
+      (this.idMedico = ""),
+        (this.nombre = ""),
+        (this.telefono = ""),
+        (this.correo = ""),
+        (this.direccion = "");
+        (this.profesion = "");
+        this.editedIndex = -1;
+    },
+
+    cerrarDialog() {
+      this.dialog = false;
+      this.limpiar();
+    },
     }
 }
 </script>
