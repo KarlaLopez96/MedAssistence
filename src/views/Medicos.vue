@@ -1,32 +1,13 @@
 <template>
-   <v-data-table
-    :headers="headers"
-    :items="medicos"
-    class="elevation-1"
-  >
+  <v-data-table :headers="headers" :items="medicos" class="elevation-1">
     <template v-slot:top>
-      <v-toolbar
-        flat
-      >
+      <v-toolbar flat>
         <v-toolbar-title>Médicos</v-toolbar-title>
-        <v-divider
-          class="mx-4"
-          inset
-          vertical
-        ></v-divider>
+        <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog
-          v-model="dialog"
-          max-width="500px"
-        >
+        <v-dialog v-model="dialog" max-width="500px" persistent>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              color="primary"
-              dark
-              class="mb-2"
-              v-bind="attrs"
-              v-on="on"
-            >
+            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
               Nuevo Médico
             </v-btn>
           </template>
@@ -38,54 +19,34 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
+                  <v-col cols="12" sm="6" md="6">
                     <v-text-field
                       v-model="nombre"
                       label="Nombre"
                     ></v-text-field>
                   </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="direccion"
-                      label="Dirección"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
+                  <v-col cols="12" sm="6" md="6">
                     <v-text-field
                       v-model="telefono"
                       label="Teléfono"
                     ></v-text-field>
                   </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
+                  <v-col cols="12" sm="6" md="6">
                     <v-text-field
                       v-model="correo"
                       label="Correo"
                     ></v-text-field>
                   </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
+                  <v-col cols="12" sm="6" md="6">
                     <v-text-field
                       v-model="profesion"
                       label="Profesión"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="8">
+                    <v-text-field
+                      v-model="direccion"
+                      label="Dirección"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -94,17 +55,24 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn
-                color="blue darken-1"
-                text
-              >
+              <v-btn color="blue darken-1" text @click="cerrarDialog()">
                 Cancel
               </v-btn>
               <v-btn
                 color="blue darken-1"
+                v-if="editedIndex == 1"
                 text
+                @click="actualizar()"
               >
-                Save
+                Actualizar
+              </v-btn>
+              <v-btn
+                color="blue darken-1"
+                v-if="editedIndex == -1"
+                text
+                @click="crear()"
+              >
+                Guardar
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -112,19 +80,12 @@
       </v-toolbar>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
-      <v-icon
-        small
-        class="mr-2"
-        @click="verDetalle(item)"
-      >
+      <v-icon small class="mr-2" @click="verDetalles(item)">
         mdi-pencil
       </v-icon>
     </template>
     <template v-slot:no-data>
-      <v-btn
-        color="primary"
-        @click="initialize"
-      >
+      <v-btn color="primary" @click="initialize">
         Reset
       </v-btn>
     </template>
@@ -135,44 +96,43 @@
 import axios from "axios";
 
 export default {
-  name: 'Home',
+  name: "Home",
   data: () => ({
     medicos: [],
     editedIndex: -1,
     dialog: false,
-      headers: [
-        {
-          text: 'Nombre',
-          align: 'start',
-          sortable: false,
-          value: 'Nombre',
-        },
-        { text: 'Dirección', value: 'Direccion' },
-        { text: 'Teléfono', value: 'Telefono' },
-        { text: 'Correo', value: 'Correo' },
-        { text: 'Profesión', value: 'Profesion' },
-        { text: 'Actions', value: 'actions', sortable: false },
-      ],
-      idMedico: 0,
-      nombre: "",
-      direccion: "",
-      telefono: "",
-      correo: "",
-      profesion: "",
+    headers: [
+      {
+        text: "Nombre",
+        align: "start",
+        value: "nombre",
+      },
+      { text: "Dirección", value: "direccion" },
+      { text: "Teléfono", value: "telefono" },
+      { text: "Correo", value: "correo" },
+      { text: "Profesión", value: "profesion" },
+      { text: "Actions", value: "actions", sortable: false },
+    ],
+    idMedico: 0,
+    nombre: "",
+    direccion: "",
+    telefono: "",
+    correo: "",
+    profesion: "",
   }),
   computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'Nuevo Medico' : 'Editar Medico'
-      },
+    formTitle() {
+      return this.editedIndex === -1 ? "Nuevo Medico" : "Editar Medico";
     },
+  },
 
-    created () {
-      this.initialize()
-    },
+  created() {
+    this.initialize();
+  },
 
-    methods: {
-      initialize () {
-        let me = this;
+  methods: {
+    initialize() {
+      let me = this;
       axios
         .get("api/Medicos/Listar")
         .then(function(response) {
@@ -181,8 +141,8 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-      },
-      crear(){
+    },
+    crear() {
       let me = this;
       axios
         .post("api/Medicos/Crear", {
@@ -199,9 +159,9 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-      },
+    },
 
-      actualizar() {
+    actualizar() {
       let me = this;
       axios
         .put("api/Medicos/Actualizar", {
@@ -221,7 +181,7 @@ export default {
         });
     },
 
-     verDetalles(item) {
+    verDetalles(item) {
       this.idMedico = item.idMedico;
       this.nombre = item.nombre;
       this.telefono = item.telefono;
@@ -238,14 +198,14 @@ export default {
         (this.telefono = ""),
         (this.correo = ""),
         (this.direccion = "");
-        (this.profesion = "");
-        this.editedIndex = -1;
+      this.profesion = "";
+      this.editedIndex = -1;
     },
 
     cerrarDialog() {
       this.dialog = false;
       this.limpiar();
     },
-    }
-}
+  },
+};
 </script>
