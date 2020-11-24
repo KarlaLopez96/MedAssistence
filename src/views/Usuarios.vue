@@ -1,13 +1,28 @@
 <template>
-  <v-data-table :headers="headers" :items="usuarios" class="elevation-3">
+  <v-data-table
+    :headers="headers"
+    :items="usuarios"
+    :search="search"
+    class="elevation-3"
+  >
     <template v-slot:top>
       <v-toolbar flat>
         <v-toolbar-title>Usuarios</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
+        <v-text-field
+          class="text-xs-center"
+          v-model="search"
+          append-icon="fas fa-search"
+          label="Busqueda"
+          single-line
+          hide-details
+        ></v-text-field>
         <v-spacer></v-spacer>
-
         <v-dialog v-model="dialog" max-width="700px" persistent>
-          <template v-slot:activator="{ on, attrs }">
+          <template
+            v-slot:activator="{ on, attrs }"
+            v-if="$store.state.usuario.rol == 'Administrador'"
+          >
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
               Nuevo Usuario
             </v-btn>
@@ -51,7 +66,11 @@
                       type="password"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12" md="5">
+                  <v-col
+                    cols="12"
+                    md="5"
+                    v-if="$store.state.usuario.rol == 'Administrador'"
+                  >
                     <v-select v-model="idRol" :items="roles" label="ROLES">
                     </v-select>
                   </v-col>
@@ -130,11 +149,21 @@
         mdi-pencil
       </v-icon>
       <template v-if="item.condicion">
-        <v-icon small class="fas fa-ban" @click="ActivarDesactivar(2, item)">
+        <v-icon
+          small
+          class="fas fa-ban"
+          @click="ActivarDesactivar(2, item)"
+          v-if="$store.state.usuario.rol == 'Administrador'"
+        >
         </v-icon>
       </template>
       <template v-else>
-        <v-icon small class="fas fa-check" @click="ActivarDesactivar(1, item)">
+        <v-icon
+          small
+          class="fas fa-check"
+          @click="ActivarDesactivar(1, item)"
+          v-if="$store.state.usuario.rol == 'Administrador'"
+        >
         </v-icon>
       </template>
     </template>
@@ -156,11 +185,11 @@
 import axios from "axios";
 
 export default {
-  name: "Home",
   data: () => ({
     usuarios: [],
     dialog: false,
     editedIndex: -1,
+    search: "",
     headers: [
       {
         text: "Nombre",
@@ -207,14 +236,25 @@ export default {
   methods: {
     initialize() {
       let me = this;
-      axios
-        .get("api/Usuarios/Listar")
-        .then(function(response) {
-          me.usuarios = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+      if (me.$store.state.usuario.rol == "Usuario") {
+        axios
+          .get("api/Usuarios/ListarId/" + me.$store.state.usuario.idUsuario)
+          .then(function(response) {
+            me.usuarios = response.data;
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      } else {
+        axios
+          .get("api/Usuarios/Listar")
+          .then(function(response) {
+            me.usuarios = response.data;
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
     },
     select() {
       let me = this;

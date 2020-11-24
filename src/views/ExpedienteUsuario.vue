@@ -48,11 +48,6 @@
           </v-btn>
         </div>
         <v-dialog v-model="dialog" max-width="600px" persistent>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" dark class="ml-3" v-bind="attrs" v-on="on">
-              Nuevo
-            </v-btn>
-          </template>
           <v-card>
             <v-card-title>
               <span class="headline">{{ formTitle }}</span>
@@ -65,20 +60,22 @@
                     <v-text-field
                       v-model="nombre"
                       label="Nombre"
+                      readonly
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       v-model="nombre_Medico"
                       label="Nombre Médico"
+                      readonly
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-select
-                      v-model="idUsuario"
+                    <v-text-field
+                      v-model="nombre_Usuario"
                       label="Nombre Usuario"
-                      :items="usuarios"
-                    ></v-select>
+                      readonly
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field
@@ -86,24 +83,28 @@
                       label="Fecha"
                       type="datetime-local"
                       step="1"
+                      readonly
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field
                       v-model="detalles_Estudios"
                       label="Detalles de estudio"
+                      readonly
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       v-model="detalles_Examenes"
                       label="Detalle de examenes"
+                      readonly
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       v-model="recetas"
                       label="Recetas"
+                      readonly
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
@@ -111,6 +112,7 @@
                       v-model="costo_Cita"
                       label="Costo de cita"
                       type="number"
+                      readonly
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -118,32 +120,12 @@
             </v-card-text>
 
             <v-card-actions>
-              <v-btn
-                @click="descargarPDF()"
-                v-if="editedIndex == 1"
-                color="orange"
-                dark
-                ><i class="fas fa-file-pdf fa-2x"></i
-              ></v-btn>
               <v-spacer></v-spacer>
+              <v-btn @click="descargarPDF()" color="orange" dark>
+                <i class="fas fa-file-pdf fa-2x"></i>
+              </v-btn>
               <v-btn color="blue darken-1" text @click="cerrarDialog()">
-                Cancelar
-              </v-btn>
-              <v-btn
-                color="blue darken-1"
-                v-if="editedIndex == 1"
-                text
-                @click="actualizar()"
-              >
-                Actualizar
-              </v-btn>
-              <v-btn
-                color="blue darken-1"
-                v-if="editedIndex == -1"
-                text
-                @click="crear()"
-              >
-                Guardar
+                Cerrar
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -198,7 +180,6 @@ export default {
     nombre: "",
     nombre_Medico: "",
     nombre_Usuario: "",
-    usuarios: [],
     fecha: "",
     detalles_Estudios: "",
     detalles_Examenes: "",
@@ -210,13 +191,12 @@ export default {
   }),
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "Nuevo Expediente" : "Editar Expediente";
+      return this.editedIndex === -1 ? "Nuevo Expediente" : "Expediente";
     },
   },
 
   created() {
     this.initialize();
-    this.select();
   },
 
   methods: {
@@ -224,7 +204,7 @@ export default {
       let me = this;
       me.expedientes = [];
       axios
-        .get("api/Expedientes/Listar")
+        .get("api/Expedientes/ListarId/" + this.$store.state.usuario.idUsuario)
         .then(function(response) {
           me.expedientes = response.data;
         })
@@ -237,7 +217,14 @@ export default {
       if (me.fechaInicio != "" && me.fechaFin != "") {
         me.expedientes = [];
         axios
-          .get("api/Expedientes/Informe/" + me.fechaInicio + "/" + me.fechaFin)
+          .get(
+            "api/Expedientes/InformeID/" +
+              me.fechaInicio +
+              "/" +
+              me.fechaFin +
+              "/" +
+              this.$store.state.usuario.idUsuario
+          )
           .then(function(response) {
             me.expedientes = response.data;
             me.ExportarExcel();
@@ -248,68 +235,6 @@ export default {
       } else {
         me.snackValidacion = true;
       }
-    },
-    select() {
-      let me = this;
-      var usuariosArray = [];
-      axios
-        .get("api/Usuarios/Listar")
-        .then(function(response) {
-          usuariosArray = response.data;
-          usuariosArray.map(function(x) {
-            me.usuarios.push({ text: x.nombre, value: x.idUsuario });
-          });
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    },
-    crear() {
-      let me = this;
-      axios
-        .post("api/Expedientes/Crear", {
-          idMedico: 1,
-          idUsuario: me.idUsuario,
-          nombre: me.nombre,
-          Nombre_Medico: me.nombre_Medico,
-          Nombre_Usuario: me.usuarios[me.idUsuario - 1].text,
-          Fecha: me.fecha,
-          Detalles_Estudios: me.detalles_Estudios,
-          Detalles_Examenes: me.detalles_Examenes,
-          Recetas: me.recetas,
-          Costo_Cita: me.costo_Cita,
-        })
-        .then(function(response) {
-          me.initialize();
-          me.cerrarDialog();
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    },
-    actualizar() {
-      let me = this;
-      axios
-        .put("api/Expedientes/Actualizar", {
-          idExpediente: me.idExpediente,
-          idMedico: me.idMedico,
-          idUsuario: me.idUsuario,
-          Nombre: me.nombre,
-          Nombre_Medico: me.nombre_Medico,
-          Nombre_Usuario: me.nombre_Usuario,
-          Fecha: me.fecha,
-          Detalles_Estudios: me.detalles_Estudios,
-          Detalles_Examenes: me.detalles_Examenes,
-          Recetas: me.recetas,
-          Costo_Cita: me.costo_Cita,
-        })
-        .then(function(response) {
-          me.initialize();
-          me.cerrarDialog();
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
     },
     verDetalles(item) {
       this.idExpediente = item.idExpediente;
@@ -330,7 +255,7 @@ export default {
       this.idExpediente = 0;
       this.idUsuario = 0;
       this.idMedico = 0;
-      this.nombreLocal = "";
+      this.nombre = "";
       this.nombre_Medico = "";
       this.nombre_Usuario = "";
       this.detalles_Estudios = "";
@@ -375,9 +300,10 @@ export default {
       doc.save("Expediente.pdf");
     },
     ExportarExcel() {
+      let me = this;
       let data = XLSX.utils.json_to_sheet(this.expedientes);
       const workbook = XLSX.utils.book_new();
-      const filename = "Expediente";
+      const filename = "mi Expediente";
       XLSX.utils.book_append_sheet(workbook, data, filename);
       XLSX.writeFile(workbook, `${filename}.xlsx`);
     },

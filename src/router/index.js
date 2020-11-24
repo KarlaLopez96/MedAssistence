@@ -3,8 +3,10 @@ import VueRouter from 'vue-router'
 import Usuarios from '../views/Usuarios.vue'
 import Medicos from '../views/Medicos.vue'
 import Expediente from '../views/Expediente.vue'
+import ExpedienteUsuario from '../views/ExpedienteUsuario.vue'
 import Rol from "../views/Rol.vue"
 import Login from "../views/Login.vue"
+import Mapa from "../views/Mapa.vue"
 import store from "../store";
 
 Vue.use(VueRouter)
@@ -25,7 +27,6 @@ const routes = [
     component: Medicos,
     meta: {
       administrador: true,
-      usuario: true,
     }
   },
   {
@@ -34,13 +35,28 @@ const routes = [
     component: Expediente,
     meta: {
       administrador: true,
+    }
+  },
+  {
+    path: '/ExpedienteUsuario',
+    name: 'ExpedienteUsuario',
+    component: ExpedienteUsuario,
+    meta: {
       usuario: true,
     }
   },
   {
     path: '/rol',
-    name: 'Rol',
+    name: 'Roles',
     component: Rol,
+    meta: {
+      administrador: true,
+    }
+  },
+  {
+    path: '/mapa',
+    name: 'Mapa',
+    component: Mapa,
     meta: {
       administrador: true,
       usuario: true,

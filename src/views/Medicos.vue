@@ -1,9 +1,22 @@
 <template>
-  <v-data-table :headers="headers" :items="medicos" class="elevation-1">
+  <v-data-table
+    :headers="headers"
+    :items="medicos"
+    :search="search"
+    class="elevation-1"
+  >
     <template v-slot:top>
       <v-toolbar flat>
         <v-toolbar-title>Médicos</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
+        <v-text-field
+          class="text-xs-center"
+          v-model="search"
+          append-icon="fas fa-search"
+          label="Busqueda"
+          single-line
+          hide-details
+        ></v-text-field>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px" persistent>
           <template v-slot:activator="{ on, attrs }">
@@ -101,6 +114,7 @@ export default {
     medicos: [],
     editedIndex: -1,
     dialog: false,
+    search: "",
     headers: [
       {
         text: "Nombre",

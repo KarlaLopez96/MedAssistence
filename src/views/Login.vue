@@ -1,7 +1,10 @@
 <template>
-  <v-container>
-    <v-row no-gutters justify="center" align="center" class="mt-12 pt-12">
-      <v-card width="400px" >
+  <v-container class="mt-12 pt-12">
+    <v-row no-gutters justify="center" align="center">
+      <v-card width="600" height="350" class="rounded-xl">
+        <v-img :src="require('@/assets/mi_logo.jpg')" contain ></v-img>
+      </v-card>
+      <v-card width="400px" class="ml-1">
         <v-toolbar flat dark color="blue darken-3">
           <v-toolbar-title class="mx-auto">
             INICIO DE SESION
@@ -67,7 +70,11 @@ export default {
         })
         .then((data) => {
           this.$store.dispatch("guardarToken", data.token);
-          this.$router.push({ name: "Expediente" });
+          if(this.$store.state.usuario.rol == "Usuario"){
+            this.$router.push({ name: "ExpedienteUsuario" })
+          } else {
+            this.$router.push({ name: "Expediente" });
+          }
         })
         .catch((err) => {
             if (err.response.status == 400) {

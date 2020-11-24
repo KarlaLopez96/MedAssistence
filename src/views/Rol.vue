@@ -31,9 +31,6 @@
           </v-chip>
         </template>
       </v-data-table>
-      <v-overlay v-model="overlay" z-index="0">
-        <v-progress-circular indeterminate size="64"></v-progress-circular>
-      </v-overlay>
     </v-flex>
   </v-layout>
 </template>
@@ -51,7 +48,6 @@ export default {
         { text: "Estado", value: "condicion", sortable: false }
       ],
       search: "",
-      overlay: true,
     };
   },
   created() {
@@ -66,9 +62,6 @@ export default {
         .get("api/Roles/Listar", configuracion)
         .then(function(response) {
           me.roles = response.data;
-          if(response.status == 200){
-            me.overlay = false;
-          }
         })
         .catch(function(error) {
           console.log(error);

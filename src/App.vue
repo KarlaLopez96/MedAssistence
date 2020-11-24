@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app>
     <v-app-bar
       app
       color="purple"
@@ -24,40 +24,109 @@
       v-model="drawer"
       v-if="logueado"
     >
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="title">
-            MedAssitance
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider dark light></v-divider>
-
-      <v-list nav dense v-if="esAdministrador || esUsuario">
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
-          :to="{ name: item.screen }"
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
+      <v-list dense nav>
+        <v-list-item>
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title class="title">
+              MedAssitance
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-divider dark light></v-divider>
+
+        <template v-if="esAdministrador">
+          <v-list-item :to="{ name: 'Expediente' }">
+            <v-list-item-action>
+              <i class="far fa-address-card"></i>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                Expedientes
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+
+        <template v-if="esAdministrador">
+          <v-list-item :to="{ name: 'Medicos' }">
+            <v-list-item-action>
+              <i class="fas fa-user-md"></i>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                Medicos
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+
+        <template v-if="esAdministrador || esUsuario">
+          <v-list-item :to="{ name: 'Usuarios' }">
+            <v-list-item-action>
+              <i class="fas fa-users"></i>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                Usuarios
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+
+        <template v-if="esAdministrador">
+          <v-list-item :to="{ name: 'Roles' }">
+            <v-list-item-action>
+              <i class="fas fa-fingerprint"></i>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                Roles
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+
+        <template v-if="esUsuario">
+          <v-list-item :to="{ name: 'ExpedienteUsuario' }">
+            <v-list-item-action>
+              <i class="far fa-address-cardt"></i>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                Mi Expediente
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+
+        <template v-if="esAdministrador || esUsuario">
+          <v-list-item :to="{ name: 'Mapa' }">
+            <v-list-item-action>
+              <i class="fas fa-map-marked-alt"></i>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                Mapa
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
       </v-list>
     </v-navigation-drawer>
-    <v-main>
+
+    <v-main >
       <v-container>
         <v-slide-y-transition mode="out-in">
           <router-view />
         </v-slide-y-transition>
       </v-container>
     </v-main>
+
+    <v-footer  color="purple" absolute dark>
+      <v-spacer></v-spacer>
+    MedAssistance 2020
+  </v-footer>
   </v-app>
 </template>
 
@@ -69,16 +138,6 @@ export default {
 
   data: () => ({
     drawer: true,
-    items: [
-      {
-        title: "Expediente",
-        icon: "far fa-address-card",
-        screen: "Expediente",
-      },
-      { title: "Medicos", icon: "fas fa-user-md", screen: "Medicos" },
-      { title: "Usuarios", icon: "fas fa-users", screen: "Usuarios" },
-      { title: "Roles", icon: "fas fa-fingerprint", screen: "Rol" },
-    ],
   }),
   computed: {
     logueado() {
