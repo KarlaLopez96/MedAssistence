@@ -3,9 +3,8 @@
     <v-app-bar
       app
       color="purple"
-      fixed
-      dense
       dark
+      dense
       :clipped-left="$vuetify.breakpoint.mdAndUp"
     >
       <v-toolbar-title>

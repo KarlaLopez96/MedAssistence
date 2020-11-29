@@ -4,102 +4,166 @@
       <v-col class="pa-0 mt-3 ma-0">
         <div id="mapContainer" class="DimensionMap"></div>
       </v-col>
-        <div id="features">
-          <section id="baker" class="active">
-            <h3>221b Baker St.</h3>
-            <p>
-              November 1895. London is shrouded in fog and Sherlock Holmes and
-              Watson pass time restlessly awaiting a new case. "The London
-              criminal is certainly a dull fellow," Sherlock bemoans. "There
-              have been numerous petty thefts," Watson offers in response. Just
-              then a telegram arrives from Sherlock's brother Mycroft with a
-              mysterious case.
-            </p>
-          </section>
-          <section id="aldgate">
-            <h3>Aldgate Station</h3>
-            <p>
-              Arthur Cadogan West was found dead, head crushed in on train
-              tracks at Aldgate Station at 6AM Tuesday morning. West worked at
-              Woolwich Arsenal on the Bruce-Partington submarine, a secret
-              military project. Plans for the submarine had been stolen and
-              seven of the ten missing papers were found in West's possession.
-              Mycroft implores Sherlock to take the case and recover the three
-              missing papers.
-            </p>
-          </section>
-          <section id="london-bridge">
-            <h3>London Bridge</h3>
-            <p>
-              Holmes and Watson's investigations take them across London.
-              Sherlock deduces that West was murdered elsewhere, then moved to
-              Aldgate Station to create the illusion that he was crushed on the
-              tracks by a train. On their way to Woolwich Sherlock dispatches a
-              telegram to Mycroft at London Bridge: "Send list of all foreign
-              spies known to be in England, with full address."
-            </p>
-          </section>
-          <section id="woolwich">
-            <h3>Woolwich Arsenal</h3>
-            <p>
-              While investigating at Woolwich Arsenal Sherlock learns that West
-              did not have the three keys&mdash;door, office, and
-              safe&mdash;necessary to steal the papers. The train station clerk
-              mentions seeing an agitated West boarding the 8:15 train to London
-              Bridge. Sherlock suspects West of following someone who had access
-              to the Woolwich chief's keyring with all three keys.
-            </p>
-          </section>
-          <section id="gloucester">
-            <h3>Gloucester Road</h3>
-            <p>
-              Mycroft responds to Sherlock's telegram and mentions several
-              spies. Hugo Oberstein of 13 Caulfield Gardens catches Sherlock's
-              eye. He heads to the nearby Gloucester Road station to investigate
-              and learns that the windows of Caulfield Gardens open over rail
-              tracks where trains stop frequently.
-            </p>
-          </section>
-          <section id="caulfield-gardens">
-            <h3>13 Caulfield Gardens</h3>
-            <p>
-              Holmes deduces that the murderer placed West atop a stopped train
-              at Caulfield Gardens. The train traveled to Aldgate Station before
-              West's body finally toppled off. Backtracking to the criminal's
-              apartment, Holmes finds a series of classified ads from
-              <em>The Daily Telegraph</em> stashed away. All are under the name
-              Pierrot: "Monday night after nine. Two taps. Only ourselves. Do
-              not be so suspicious. Payment in hard cash when goods delivered."
-            </p>
-          </section>
-          <section id="telegraph">
-            <h3>The Daily Telegraph</h3>
-            <p>
-              Holmes and Watson head to The Daily Telegraph and place an ad to
-              draw out the criminal. It reads: "To-night. Same hour. Same place.
-              Two taps. Most vitally important. Your own safety at stake.
-              Pierrot." The trap works and Holmes catches the criminal: Colonel
-              Valentine Walter, the brother of Woolwich Arsenal's chief. He
-              confesses to working for Hugo Oberstein to obtain the submarine
-              plans in order to pay off his debts.
-            </p>
-          </section>
-          <section id="charing-cross">
-            <h3>Charing Cross Hotel</h3>
-            <p>
-              Walter writes to Oberstein and convinces him to meet in the
-              smoking room of the Charing Cross Hotel where he promises
-              additional plans for the submarine in exchange for money. The plan
-              works and Holmes and Watson catch both criminals.
-            </p>
-            <small id="citation">
-              Adapted from
-              <a href="http://www.gutenberg.org/files/2346/2346-h/2346-h.htm"
-                >Project Gutenberg</a
-              >
-            </small>
-          </section>
-        </div>
+      <div id="features">
+        <section id="Farmacia-Value-1" class="active mt-3">
+          <h3>Farmacia Value</h3>
+          <p>
+            Avenida Independencia Sur, Santa Ana
+          </p>
+          <img
+            width="330"
+            height="250"
+            src="https://farmavalue.biz/elsalvador/wp-content/uploads/sites/19/2019/06/Santa-Ana1.jpg"
+          />
+        </section>
+        <section id="Farmacia-Value-2">
+          <h3>Farmacia Value</h3>
+          <p>
+            Estación de servicio y Centro Comercial Texaco Las Piletas B-1
+          </p>
+          <img
+            width="330"
+            height="250"
+            src="https://farmavalue.biz/elsalvador/wp-content/uploads/sites/19/2019/06/Escalo%CC%81n2.jpg"
+          />
+        </section>
+        <section id="Farmacia-Value-3">
+          <h3>Farmacia Value</h3>
+          <p>
+            Diagonal Doctor Luis Edmundo Vasquez,, San Salvador
+          </p>
+          <img
+            width="330"
+            height="250"
+            src="https://farmavalue.biz/elsalvador/wp-content/uploads/sites/19/2019/06/Escalo%CC%81n1.jpg"
+          />
+        </section>
+        <section id="Farmacia-Value-4">
+          <h3>Farmacia Value</h3>
+          <p>
+            Plaza Soyapango, Soyapango
+          </p>
+          <img
+            width="330"
+            height="250"
+            src="https://farmavalue.biz/elsalvador/wp-content/uploads/sites/19/2019/06/San-Jacinto2.jpg"
+          />
+        </section>
+        <section id="Farmacia-Economica-1">
+          <h3>Farmacia Económica</h3>
+          <p>
+            Calle Chiltiupan, Santa Tecla
+          </p>
+          <img
+            width="330"
+            height="250"
+            src="https://i.ytimg.com/vi/GAXLZ-Sk3uM/hqdefault.jpg"
+          />
+        </section>
+        <section id="Farmacia-Economica-2">
+          <h3>Farmacia Económica</h3>
+          <p>
+            Boulevard Constitución y Calle El Algodon, San Salvador
+          </p>
+          <img
+            width="330"
+            height="250"
+            src="https://multiplaza-samantha.s3.amazonaws.com/uploads/post/v4_mobile/3543/v400_400_FarmaciaEconomicas_800x800.jpg"
+          />
+        </section>
+        <section id="Farmacia-Economica-3">
+          <h3>Farmacia Económica</h3>
+          <p>
+            9° Ave. Sur y calle Ruben Dario Centro Comericial Plaza Centro Local
+            211 San Salvador CP, 1101
+          </p>
+          <img
+            width="330"
+            height="250"
+            src="https://elencuentrosv.com/wp-content/uploads/2020/04/ECL-farmacias-economicas.jpg"
+          />
+        </section>
+        <section id="Farmacia-Economica-4">
+          <h3>Farmacia Económica</h3>
+          <p>
+            Calle Modelo, San Salvador
+          </p>
+          <img
+            width="330"
+            height="250"
+            src="https://1.bp.blogspot.com/-8ZKxa25MR-w/UoZty5c5YaI/AAAAAAAAADg/mG8llKW6Kl8/s1600/Plaza+Mundo+3.jpg"
+          />
+        </section>
+        <section id="Farmacia-San-Nicolas-1">
+          <h3>Farmacia San Nicolás</h3>
+          <p>
+            Sonsonate
+          </p>
+          <img
+            width="330"
+            height="250"
+            src="https://cdn-pro.elsalvador.com/wp-content/uploads/2017/01/25204021/1435747365718.jpg"
+          />
+        </section>
+        <section id="Farmacia-San-Nicolas-2">
+          <h3>Farmacia San Nicolás</h3>
+          <p>
+            Centro comercial El encuentro, Lourdes
+          </p>
+          <img
+            width="330"
+            height="250"
+            src="https://www.dinero.com.sv/images/20161007_143212.jpg"
+          />
+        </section>
+        <section id="Farmacia-San-Nicolas-3">
+          <h3>Farmacia San Nicolás</h3>
+          <p>
+            Apopa
+          </p>
+          <img
+            width="330"
+            height="250"
+            src="https://cdn-pro.elsalvador.com/wp-content/uploads/2017/01/27002259/1434904918144.jpg"
+          />
+        </section>
+        <section id="Farmacia-San-Nicolas-4">
+          <h3>Farmacia San Nicolás</h3>
+          <p>
+            Km. 10, Carretera al Puerto de La Libertad Antiguo Cuscatlán,
+            Antiguo Cuscatlán
+          </p>
+          <img
+            width="330"
+            height="250"
+            src="https://www.farmaciasannicolas.com/img/nosotros/acerca/01.jpg"
+          />
+        </section>
+        <section id="Farmacia-UNO-1">
+          <h3>Farmacia UNO</h3>
+          <p>
+            Jardines de la Gloria, Prol Bulevar Constitución, Mejicanos
+          </p>
+        </section>
+        <section id="Farmacia-UNO-2">
+          <h3>Farmacia UNO</h3>
+          <p>
+            Pje No. 5 Dr Salvador Infante Diaz, San Salvador
+          </p>
+        </section>
+        <section id="Farmacia-UNO-3">
+          <h3>Farmacia UNO</h3>
+          <p>
+            Cd Merliot, la gran vía
+          </p>
+        </section>
+        <section id="Farmacia-UNO-4">
+          <h3>Farmacia UNO</h3>
+          <p>
+            Calle Antigua a Huizucar C-37, San Salvador
+          </p>
+        </section>
+      </div>
     </v-row>
   </v-container>
 </template>
@@ -109,134 +173,297 @@ import mapboxgl from "mapbox-gl";
 export default {
   data() {
     return {
-      coordenadas: {
-        lat: 0,
-        lng: 0,
-      },
-      markers: [],
       map: "",
+      coordenadas: {
+        lat: 13.793964668767925,
+        lng: -88.89500168220982,
+      },
+      markers: [
+        {
+          name: "Farmacia Value",
+          position: {
+            lat: 14.015178380223439,
+            lng: -89.56268108185407,
+          },
+        },
+        {
+          name: "Farmacia Value",
+          position: {
+            lat: 13.658393407400249,
+            lng: -89.27937626849335,
+          },
+        },
+        {
+          name: "Farmacia Value",
+          position: {
+            lat: 13.709680955056216,
+            lng: -89.20169949812468,
+          },
+        },
+        {
+          name: "Farmacia Value",
+          position: {
+            lat: 13.702342934664744,
+            lng: -89.151917696986,
+          },
+        },
+        {
+          name: "Farmacia Económica",
+          position: {
+            lat: 13.678560556766945,
+            lng: -89.26809090327585,
+          },
+        },
+        {
+          name: "Farmacia Económica",
+          position: {
+            lat: 13.722047721532723,
+            lng: -89.22350185795166,
+          },
+        },
+        {
+          name: "Farmacia Económica",
+          position: {
+            lat: 13.70370320685091,
+            lng: -89.19586437806772,
+          },
+        },
+        {
+          name: "Farmacia Económica",
+          position: {
+            lat: 13.689855265419146,
+            lng: -89.19515490701257,
+          },
+        },
+        {
+          name: "Farmacia San Nicolás",
+          position: {
+            lat: 13.758889041579193,
+            lng: -89.72249867187408,
+          },
+        },
+        {
+          name: "Farmacia San Nicolás",
+          position: {
+            lat: 13.756221254884057,
+            lng: -89.35994984787598,
+          },
+        },
+        {
+          name: "Farmacia San Nicolás",
+          position: {
+            lat: 13.798568741372952,
+            lng: -89.17764547878467,
+          },
+        },
+        {
+          name: "Farmacia San Nicolás",
+          position: {
+            lat: 13.671253118961747,
+            lng: -89.27051428380605,
+          },
+        },
+        {
+          name: "Farmacia UNO",
+          position: {
+            lat: 13.748177952516501,
+            lng: -89.21810405026591,
+          },
+        },
+        {
+          name: "Farmacia UNO",
+          position: {
+            lat: 13.716494600870293,
+            lng: -89.20231120461794,
+          },
+        },
+        {
+          name: "Farmacia UNO",
+          position: {
+            lat: 13.68480697233331,
+            lng: -89.25483958253402,
+          },
+        },
+        {
+          name: "Farmacia UNO",
+          position: {
+            lat: 13.682805505046371,
+            lng: -89.22497050489547,
+          },
+        },
+      ],
       accessToken:
         "pk.eyJ1Ijoiam9obmxpbmFyZXMiLCJhIjoiY2tjcWk2eDZrMTU2bjJyczVyMWF0ejg3NiJ9.848u9JaZDYfKTRPBzFvDwA",
     };
   },
-  created() {
-    this.$getLocation({})
-      .then((coordinates) => {
-        this.coordenadas = coordinates;
-        mapboxgl.accessToken = this.accessToken;
-        var map = new mapboxgl.Map({
-          container: "mapContainer",
-          style: "mapbox://styles/mapbox/streets-v11",
-          center: this.coordenadas,
-          zoom: 8,
-        });
-        var marker = new mapboxgl.Marker({ color: "blue" })
-          .setLngLat(this.coordenadas)
-          .addTo(map);
+  mounted() {
+    mapboxgl.accessToken = this.accessToken;
+    var map = new mapboxgl.Map({
+      container: "mapContainer",
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: [this.coordenadas.lng, this.coordenadas.lat],
+      zoom: 8,
+    });
 
-        map.addControl(new mapboxgl.FullscreenControl());
-
-        map.addControl(
-          new mapboxgl.GeolocateControl({
-            positionOptions: {
-              enableHighAccuracy: true,
-            },
-            trackUserLocation: true,
-          })
-        );
-        map.addControl(new mapboxgl.NavigationControl());
-
-        map.addControl(
-          new MapboxDirections({
-            accessToken: mapboxgl.accessToken,
-          }),
-          "top-left"
-        );
-        var chapters = {
-          baker: {
-            bearing: 27,
-            center: [-0.15591514, 51.51830379],
-            zoom: 15.5,
-            pitch: 20,
-          },
-          aldgate: {
-            duration: 6000,
-            center: [-0.07571203, 51.51424049],
-            bearing: 150,
-            zoom: 15,
-            pitch: 0,
-          },
-          "london-bridge": {
-            bearing: 90,
-            center: [-0.08533793, 51.50438536],
-            zoom: 13,
-            speed: 0.6,
-            pitch: 40,
-          },
-          woolwich: {
-            bearing: 90,
-            center: [0.05991101, 51.48752939],
-            zoom: 12.3,
-          },
-          gloucester: {
-            bearing: 45,
-            center: [-0.18335806, 51.49439521],
-            zoom: 15.3,
-            pitch: 20,
-            speed: 0.5,
-          },
-          "caulfield-gardens": {
-            bearing: 180,
-            center: [-0.19684993, 51.5033856],
-            zoom: 12.3,
-          },
-          telegraph: {
-            bearing: 90,
-            center: [-0.10669358, 51.51433123],
-            zoom: 17.3,
-            pitch: 40,
-          },
-          "charing-cross": {
-            bearing: 90,
-            center: [-0.12416858, 51.50779757],
-            zoom: 14.3,
-            pitch: 20,
-          },
-        };
-
-        window.onscroll = function() {
-          var chapterNames = Object.keys(chapters);
-          for (var i = 0; i < chapterNames.length; i++) {
-            var chapterName = chapterNames[i];
-            if (isElementOnScreen(chapterName)) {
-              setActiveChapter(chapterName);
-              break;
-            }
-          }
-        };
-
-        var activeChapterName = "baker";
-        function setActiveChapter(chapterName) {
-          if (chapterName === activeChapterName) return;
-
-          map.flyTo(chapters[chapterName]);
-
-          document.getElementById(chapterName).setAttribute("class", "active");
-          document.getElementById(activeChapterName).setAttribute("class", "");
-
-          activeChapterName = chapterName;
-        }
-
-        function isElementOnScreen(id) {
-          var element = document.getElementById(id);
-          var bounds = element.getBoundingClientRect();
-          return bounds.top < window.innerHeight && bounds.bottom > 0;
-        }
+    //control para ubicar al usuario
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
       })
-      .catch((error) => {
-        console.log(error);
-      });
+    );
+
+    //Controles para zoom y rotar mapa
+    map.addControl(new mapboxgl.NavigationControl());
+
+    //Trazar rutas al seleccionar dos puntos en el mapa
+    map.addControl(
+      new MapboxDirections({
+        accessToken: mapboxgl.accessToken,
+      }),
+      "top-left"
+    );
+
+    //Coloca los marcadores con un mensaje
+    for (let i = 0; i < this.markers.length; i++) {
+      var marker = new mapboxgl.Marker({ color: "blue" })
+        .setLngLat(this.markers[i].position)
+        .setPopup(
+          new mapboxgl.Popup({ offset: 25 }).setHTML(
+            "<strong>" + this.markers[i].name + "</strong>"
+          )
+        )
+        .addTo(map);
+    }
+
+    var chapters = {
+      "Farmacia-Value-1": {
+        bearing: 27,
+        center: [-89.56268108185407, 14.015178380223439],
+        zoom: 15.5,
+        pitch: 20,
+      },
+      "Farmacia-Value-2": {
+        duration: 6000,
+        center: [-89.27937626849335, 13.658393407400249],
+        bearing: 150,
+        zoom: 15,
+        pitch: 0,
+      },
+      "Farmacia-Value-3": {
+        bearing: 90,
+        center: [-89.20169949812468, 13.709680955056216],
+        zoom: 13,
+        speed: 0.6,
+        pitch: 40,
+      },
+      "Farmacia-Value-4": {
+        bearing: 90,
+        center: [-89.151917696986, 13.702342934664744],
+        zoom: 12.3,
+      },
+      "Farmacia-Economica-1": {
+        bearing: 45,
+        center: [-89.26809090327585, 13.678560556766945],
+        zoom: 15.3,
+        pitch: 20,
+        speed: 0.5,
+      },
+      "Farmacia-Economica-2": {
+        bearing: 180,
+        center: [-89.22350185795166, 13.722047721532723],
+        zoom: 12.3,
+      },
+      "Farmacia-Economica-3": {
+        bearing: 90,
+        center: [-89.19586437806772, 13.70370320685091],
+        zoom: 17.3,
+        pitch: 40,
+      },
+      "Farmacia-Economica-4": {
+        bearing: 90,
+        center: [-89.19515490701257, 13.689855265419146],
+        zoom: 14.3,
+        pitch: 20,
+      },
+      "Farmacia-San-Nicolas-1": {
+        bearing: 90,
+        center: [-89.72249867187408, 13.758889041579193],
+        zoom: 14.3,
+        pitch: 20,
+      },
+      "Farmacia-San-Nicolas-2": {
+        bearing: 90,
+        center: [-89.35994984787598, 13.756221254884057],
+        zoom: 14.3,
+        pitch: 20,
+      },
+      "Farmacia-San-Nicolas-3": {
+        bearing: 90,
+        center: [-89.17764547878467, 13.798568741372952],
+        zoom: 14.3,
+        pitch: 20,
+      },
+      "Farmacia-San-Nicolas-4": {
+        bearing: 90,
+        center: [-89.27051428380605, 13.671253118961747],
+        zoom: 14.3,
+        pitch: 20,
+      },
+      "Farmacia-UNO-1": {
+        bearing: 90,
+        center: [-89.21810405026591, 13.748177952516501],
+        zoom: 14.3,
+        pitch: 20,
+      },
+      "Farmacia-UNO-2": {
+        bearing: 90,
+        center: [-89.20231120461794, 13.716494600870293],
+        zoom: 14.3,
+        pitch: 20,
+      },
+      "Farmacia-UNO-3": {
+        bearing: 90,
+        center: [-89.25483958253402, 13.68480697233331],
+        zoom: 14.3,
+        pitch: 20,
+      },
+      "Farmacia-UNO-4": {
+        bearing: 90,
+        center: [-89.22497050489547, 13.682805505046371],
+        zoom: 14.3,
+        pitch: 20,
+      },
+    };
+
+    //funciones para mostrar como panel ubicaciones con marcadores y mostrando texto e imagen
+    window.onscroll = function() {
+      var chapterNames = Object.keys(chapters);
+      for (var i = 0; i < chapterNames.length; i++) {
+        var chapterName = chapterNames[i];
+        if (isElementOnScreen(chapterName)) {
+          setActiveChapter(chapterName);
+          break;
+        }
+      }
+    };
+    var activeChapterName = "Farmacia-Value-1";
+    function setActiveChapter(chapterName) {
+      if (chapterName === activeChapterName) return;
+      map.flyTo(chapters[chapterName]);
+      document.getElementById(chapterName).setAttribute("class", "active");
+      document.getElementById(activeChapterName).setAttribute("class", "");
+      activeChapterName = chapterName;
+    }
+    function isElementOnScreen(id) {
+      var element = document.getElementById(id);
+      var bounds = element.getBoundingClientRect();
+      return bounds.top < window.innerHeight && bounds.bottom > 70;
+    }
   },
+  created() {},
   methods: {},
 };
 </script>
@@ -267,6 +494,6 @@ section.active {
 }
 section:last-child {
   border-bottom: none;
-  margin-bottom: 200px;
+  margin-bottom: 500px;
 }
 </style>
